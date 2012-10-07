@@ -4,8 +4,8 @@ training-plan
 Displays training plan for Half-Marathon using the FIRST training plan.
 
 # What is it for ?
-The Furman FIRST training plan from [Furman University]: http://www.furmanfirst.com/ is well described in 
-Runner's World book [Run Less Run Faster]: http://www.amazon.com/gp/product/159486649X/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=159486649X&linkCode=as2&tag=stephasthough-20 .
+The Furman FIRST training plan from [Furman University](http://www.furmanfirst.com/) is well described in 
+Runner's World book [Run Less Run Faster]: (http://www.amazon.com/gp/product/159486649X/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=159486649X&linkCode=as2&tag=stephasthough-20).
 
 Basically, it is a simple 16-week program with moderate running sessions that try to emphasize a 3+2 approach: 3 run sessions and 2 cross-training sessions. Each run session is called 'key run' and there are 3 different key runs:
 * key run 1 - track repeats to improve economy, running speed and vo2 max
