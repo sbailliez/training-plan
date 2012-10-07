@@ -26,6 +26,11 @@ class Repeat < Step
     end
 end
 
+module DurationType
+  KILOMETERS = 1
+  SECONDS = 2
+end
+
 # This could probably be made as an Interval with intensity 'Resting'
 class Recovery < Step
   attr_accessor :duration, :type, :target
@@ -35,11 +40,11 @@ class Recovery < Step
     @target = target
   end
   def self.distance(duration)
-    Recovery.new(duration, 'kilometers')
+    Recovery.new(duration, DurationType::KILOMETERS)
   end
   
   def self.time(duration)
-    Recovery.new(duration, 'seconds')
+    Recovery.new(duration, DurationType::SECONDS)
   end
 end
 
@@ -119,7 +124,7 @@ end
 class TimeDuration < Duration
   def initialize(value)
     @value = value
-    @unit = 'seconds'
+    @unit = DurationType::SECONDS
   end
 end
 
@@ -127,7 +132,7 @@ end
 class DistanceDuration < Duration
   def initialize(value)
     @value = value
-    @unit = 'kilometers'
+    @unit = DurationType::KILOMETERS
   end
 end
 
@@ -168,11 +173,11 @@ class Interval < Step
   end
   
   def self.distance(duration, target = PaceZone::NONE)
-    Interval.new(duration, 'kilometers', target)
+    Interval.new(duration, DurationType::KILOMETERS, target)
   end
   
   def self.time(duration, target = PaceZone::NONE)
-    Interval.new(duration, 'seconds', target)
+    Interval.new(duration, DurationType::SECONDS, target)
   end
 end
 
@@ -307,7 +312,7 @@ def display_session(step, paces)
   if (step.kind_of?(Interval))
     "Interval: %.1f%s @ %s" % [ step.duration, 'km', format_pace(step.duration, step.target, paces) ]
   elsif (step.kind_of?(Recovery))
-    "RI %s" % (step.type === 'kilometers' && ("%.1f%s" % [step.duration, 'km']) || ("%02d%s" % [step.duration, 's']) )
+    "RI %s" % (step.type === DurationType::KILOMETERS && ("%.1f%s" % [step.duration, 'km']) || ("%02d%s" % [step.duration, 's']) )
   elsif (step.kind_of?(Repeat))
     "#{step.repeat} x (%s)" % step.steps.map{ |s| display_session(s, paces) }.join(' - ')
   else
