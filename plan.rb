@@ -211,6 +211,7 @@ half_marathon = [
     Session.new([ Interval.distance(12.5, PaceZone::HMP13) ]) ),
   
   WeekProgram.new(15, 
+    # FIXME this kr1 data is wrong. Need to input the entire data
     Session.new([ Interval.distance(0.4), Recovery.distance(0.4) ]),
     Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(12.5, PaceZone::HMP13) ]) ),
