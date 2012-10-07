@@ -28,10 +28,18 @@ end
 
 # This could probably be made as an Interval with intensity 'Resting'
 class Recovery < Step
-  attr_accessor :type, :value
-  def initialize(type, value)
+  attr_accessor :duration, :type, :target
+  def initialize(duration, type, target = PaceZone::NONE)
     @type = type
-    @value = value
+    @duration = duration
+    @target = target
+  end
+  def self.distance(duration)
+    Recovery.new(duration, 'kilometers')
+  end
+  
+  def self.time(duration)
+    Recovery.new(duration, 'seconds')
   end
 end
 
@@ -193,92 +201,92 @@ end
 half_marathon = [
   
   WeekProgram.new(16, 
-    Session.new([ Repeat.new(12, [Interval.distance(0.4), Recovery.new('distance', 0.4)]) ]),
+    Session.new([ Repeat.new(12, [Interval.distance(0.4), Recovery.distance(0.4)]) ]),
     Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(12.5, PaceZone::HMP13) ]) ),
   
   WeekProgram.new(15, 
-    Session.new([ Interval.distance(0.4), Recovery.new('distance', 0.4) ]),
+    Session.new([ Interval.distance(0.4), Recovery.distance(0.4) ]),
     Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(12.5, PaceZone::HMP13) ]) ),
   
   WeekProgram.new(14, 
-    Session.new([ Repeat.new(6, [Interval.distance(0.8), Recovery.new('time', 90)]) ]),
+    Session.new([ Repeat.new(6, [Interval.distance(0.8), Recovery.time(90)]) ]),
     Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(16, PaceZone::EASY) ]) ),
   
   WeekProgram.new(13, 
-    Session.new([ Repeat.new(5, [Interval.distance(1.0), Recovery.new('distance', 0.4)]) ]),
+    Session.new([ Repeat.new(5, [Interval.distance(1.0), Recovery.distance(0.4)]) ]),
     Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(14, PaceZone::HMP13) ]) ),
   
   WeekProgram.new(12, 
-    Session.new([ Repeat.new(3, [Interval.distance(1.6), Recovery.new('time', 60)]) ]),
+    Session.new([ Repeat.new(3, [Interval.distance(1.6), Recovery.time(60)]) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(10, PaceZone::LT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(18, PaceZone::HMP19) ]) ),
   
   WeekProgram.new(11, 
-    Session.new([ Repeat.new(2, [Interval.distance(1.2), Recovery.new('time', 120)]),
-      Repeat.new(4, [Interval.distance(0.8), Recovery.new('time', 120)]) ]),
+    Session.new([ Repeat.new(2, [Interval.distance(1.2), Recovery.time(120)]),
+      Repeat.new(4, [Interval.distance(0.8), Recovery.time(120)]) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(3, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY),
        Interval.distance(3, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(16, PaceZone::HMP13) ]) ),
   
   WeekProgram.new(10, 
-    Session.new([ Repeat.new(6, [Interval.distance(0.8), Recovery.new('time', 90)]) ]),
+    Session.new([ Repeat.new(6, [Interval.distance(0.8), Recovery.time(90)]) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(19, PaceZone::HMP19) ]) ),
   
   WeekProgram.new(9, 
-    Session.new([ Repeat.new(6, [Interval.distance(0.4), Recovery.new('time', 90)]),
-      Recovery.new('time', 150), Repeat.new(6, [Interval.distance(0.4), Recovery.new('time', 90)]) ]),
+    Session.new([ Repeat.new(6, [Interval.distance(0.4), Recovery.time(90)]),
+      Recovery.time(150), Repeat.new(6, [Interval.distance(0.4), Recovery.time(90)]) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(3, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY),
        Interval.distance(3, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(12.5, PaceZone::HMP13) ]) ),
 
   WeekProgram.new(8, 
-    Session.new([ Repeat.new(2, [Interval.distance(1.6), Recovery.new('time', 60)]),
-      Repeat.new(2, [Interval.distance(0.8), Recovery.new('time', 60)]) ]),
+    Session.new([ Repeat.new(2, [Interval.distance(1.6), Recovery.time(60)]),
+      Repeat.new(2, [Interval.distance(0.8), Recovery.time(60)]) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(21, PaceZone::HMP13) ]) ),
 
 
   WeekProgram.new(7, 
-    Session.new([ Repeat.new(4, [Interval.distance(1.2), Recovery.new('time', 120)]) ]),
+    Session.new([ Repeat.new(4, [Interval.distance(1.2), Recovery.time(120)]) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(10, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(16, PaceZone::HMP13) ]) ),
 
 
   WeekProgram.new(6, 
-    Session.new([ Interval.distance(1.0), Recovery.new('distance', 0.4), Interval.distance(2.0), Recovery.new('distance', 0.4),
-      Interval.distance(1.0), Recovery.new('distance', 0.4), Interval.distance(1.0), Recovery.new('distance', 0.4) ]),
+    Session.new([ Interval.distance(1.0), Recovery.distance(0.4), Interval.distance(2.0), Recovery.distance(0.4),
+      Interval.distance(1.0), Recovery.distance(0.4), Interval.distance(1.0), Recovery.distance(0.4) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(22, PaceZone::HMP19) ]) ),
 
 
   WeekProgram.new(5, 
-    Session.new([ Repeat.new(3, [Interval.distance(1.6), Recovery.new('distance', 0.4)]) ]),
+    Session.new([ Repeat.new(3, [Interval.distance(1.6), Recovery.distance(0.4)]) ]),
     Session.new([ Interval.distance(8, PaceZone::EASY) ]),
     Session.new([ Interval.distance(16, PaceZone::HMP13) ]) ),
 
 
   WeekProgram.new(4, 
-    Session.new([ Repeat.new(10, [Interval.distance(0.4), Recovery.new('distance', 0.4)]) ]),
+    Session.new([ Repeat.new(10, [Interval.distance(0.4), Recovery.distance(0.4)]) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(25, PaceZone::HMP19) ]) ),
 
   WeekProgram.new(3, 
-    Session.new([ Repeat.new(2, [Interval.distance(1.2), Recovery.new('time', 120)]), Repeat.new(4, [Interval.distance(0.8), Recovery.new('time', 120)]) ]),
+    Session.new([ Repeat.new(2, [Interval.distance(1.2), Recovery.time(120)]), Repeat.new(4, [Interval.distance(0.8), Recovery.time(120)]) ]),
     Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(19, PaceZone::HMP13) ]) ),
 
   WeekProgram.new(2, 
-    Session.new([ Repeat.new(5, [Interval.distance(1.0), Recovery.new('distance', 0.4)]) ]),
+    Session.new([ Repeat.new(5, [Interval.distance(1.0), Recovery.distance(0.4)]) ]),
     Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(12.5, PaceZone::HMP13) ]) ),
 
   WeekProgram.new(1, 
-    Session.new([ Repeat.new(6, [Interval.distance(0.4), Recovery.new('distance', 0.4)]) ]),
+    Session.new([ Repeat.new(6, [Interval.distance(0.4), Recovery.distance(0.4)]) ]),
     Session.new([ Interval.distance(5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(21.1, PaceZone::HMP) ]) )
   ]
@@ -299,7 +307,7 @@ def display_session(step, paces)
   if (step.kind_of?(Interval))
     "Interval: %.1f%s @ %s" % [ step.duration, 'km', format_pace(step.duration, step.target, paces) ]
   elsif (step.kind_of?(Recovery))
-    "RI %.1f%s" % (step.type === 'distance' && [step.value, 'km'] || [step.value, 's'])
+    "RI %s" % (step.type === 'kilometers' && ("%.1f%s" % [step.duration, 'km']) || ("%02d%s" % [step.duration, 's']) )
   elsif (step.kind_of?(Repeat))
     "#{step.repeat} x (%s)" % step.steps.map{ |s| display_session(s, paces) }.join(' - ')
   else
