@@ -46,6 +46,7 @@ end
 
 # Sample. Let's assume 24 minutes for 5K
 time = 24*60
+training_plan = Program::HALF_MARATHON
 
 opts = GetoptLong.new(
   [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
@@ -65,22 +66,32 @@ opts.each do |opt, arg|
    5K time as mm:ss format. eg 22:35
 
 --program [name]:
-   The program name: 5k, 10k, half-marathon, novice-marathon, marathon
+   The program name: 5k, 10k, half-marathon (default), novice-marathon, marathon
 
 "
       exit 0
     when '--time'
       time = arg.scan(/(\d{2}):(\d{2})/).collect{ $1.to_i*60 + $2.to_i }.first
-    when '--name'
-      # FIXME program
+    when '--program'
+      if (arg === '5k') 
+        training_plan = Program::KM5 
+      elsif (arg === '10k') 
+        training_plan = Program::KM10
+      elsif (arg === 'half-marathon') 
+        training_plan = Program::HALF_MARATHON
+      elsif (arg === 'novice-marathon')
+        training_plan = Program::NOVICE_MARATHON
+      elsif (arg === 'marathon')
+        training_plan = Program::MARATHON
+      else
+        raise "Invalid program name: '%s'" % arg
+      end
   end
 end
 
 paces = Paces.new(time)
-training_plan = Program::HALF_MARATHON
 
-# display that for validation
-puts "Training Program for Half-Marathon with a %s 5K time" % sec_to_mmss(time)
+puts "Training Program for %s with a %s 5K time" % [training_plan.name, sec_to_mmss(time)]
 training_plan.weeks.each{ |program|
   puts "Week #{program.week}"
   puts "  KR1"
