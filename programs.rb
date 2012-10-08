@@ -68,36 +68,25 @@ end
 # return the pace base on distance, type and the selected paces structures for the given time
 # TODO somewhat absurd way to do this... clean that up when possible
 def get_pace(duration, type, paces)
-  if (type === PaceZone::HMP)
-    paces.kr3.hmp
-  elsif (type === PaceZone::HMP13)
-    paces.kr3.hmp + 13
-  elsif (type === PaceZone::HMP19)
-    paces.kr3.hmp + 19
-  elsif (type === PaceZone::ST)
-    paces.kr2.st
-  elsif (type === PaceZone::MT)
-    paces.kr2.mt
-  elsif (type === PaceZone::LT)
-    paces.kr2.lt
-  elsif (type === PaceZone::EASY)
-    paces.kr2.easy
-  elsif (type === PaceZone::NONE && duration == 0.4)
-    paces.kr1.m400
-  elsif (type === PaceZone::NONE && duration == 0.6)
-    paces.kr1.m600
-  elsif (type === PaceZone::NONE && duration == 0.8)
-    paces.kr1.m800
-  elsif (type === PaceZone::NONE && duration == 1.0)
-    paces.kr1.m1000
-  elsif (type === PaceZone::NONE && duration == 1.2)
-    paces.kr1.m1200
-  elsif (type === PaceZone::NONE && duration == 1.6)
-    paces.kr1.m1600
-  elsif (type === PaceZone::NONE && duration == 2.0)
-    paces.kr1.m2000
-  elsif (type === PaceZone::NONE) # fallback for warmup / cooldown. no pace use easy
-    paces.kr2.easy
+  case type
+  when PaceZone::HMP then paces.kr3.hmp
+  when PaceZone::HMP13 then paces.kr3.hmp + 13
+  when PaceZone::HMP19 then paces.kr3.hmp + 19
+  when PaceZone::ST then paces.kr2.st
+  when PaceZone::MT then paces.kr2.mt
+  when PaceZone::LT then paces.kr2.lt
+  when PaceZone::EASY then paces.kr2.easy
+  when PaceZone::NONE then
+    case duration
+    when 0.4 then paces.kr1.m400
+    when 0.6 then paces.kr1.m600
+    when 0.8 then paces.kr1.m800
+    when 1.0 then paces.kr1.m1000
+    when 1.2 then paces.kr1.m1200
+    when 1.6 then paces.kr1.m1600
+    when 2.0 then paces.kr1.m2000
+    else paces.kr2.easy # default to easy if no pace given
+    end
   else 
     raise "Invalid pace: #{distance} #{type}"
   end
