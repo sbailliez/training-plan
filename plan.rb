@@ -73,18 +73,13 @@ opts.each do |opt, arg|
     when '--time'
       time = arg.scan(/(\d{2}):(\d{2})/).collect{ $1.to_i*60 + $2.to_i }.first
     when '--program'
-      if (arg === '5k') 
-        training_plan = Program::KM5 
-      elsif (arg === '10k') 
-        training_plan = Program::KM10
-      elsif (arg === 'half-marathon') 
-        training_plan = Program::HALF_MARATHON
-      elsif (arg === 'novice-marathon')
-        training_plan = Program::NOVICE_MARATHON
-      elsif (arg === 'marathon')
-        training_plan = Program::MARATHON
-      else
-        raise "Invalid program name: '%s'" % arg
+      training_plan = case arg
+        when '5k' then Program::KM5 
+        when '10k'then Program::KM10
+        when 'half-marathon' then Program::HALF_MARATHON
+        when 'novice-marathon' then Program::NOVICE_MARATHON
+        when 'marathon' then Program::MARATHON
+        else raise "Invalid program name: '%s'" % arg
       end
   end
 end
