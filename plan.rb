@@ -13,7 +13,7 @@
 
 require './kr_data.rb'
 require './programs.rb'
-  
+require 'getoptlong'
 
 
 # Format a number of seconds into mm:ss format. Easier for workout input/human
@@ -47,6 +47,34 @@ end
 # Sample. Let's assume 24 minutes for 5K
 time = 24*60
 
+opts = GetoptLong.new(
+  [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
+  [ '--time', '-t', GetoptLong::REQUIRED_ARGUMENT ],
+  [ '--program', '-p', GetoptLong::OPTIONAL_ARGUMENT ]
+)
+
+opts.each do |opt, arg|
+  case opt
+    when '--help'
+      puts "plan [OPTION]
+
+-h, --help:
+   show help
+
+--time t, -t t:
+   5K time as mm:ss format. eg 22:35
+
+--program [name]:
+   The program name: 5k, 10k, half-marathon, novice-marathon, marathon
+
+"
+      exit 0
+    when '--time'
+      time = arg.scan(/(\d{2}):(\d{2})/).collect{ $1.to_i*60 + $2.to_i }.first
+    when '--name'
+      # FIXME program
+  end
+end
 
 paces = Paces.new(time)
 

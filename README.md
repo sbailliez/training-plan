@@ -22,14 +22,14 @@ this small script is intended to be a starting point and get a quick overview of
 A couple of things can be done, time permitting:
 
 * This needs some serious clean up
+* Support the 10K, half-marathon and marathon training programs
 * Fix the workout to support pace zone (low/high) to match Garmin workout instead of single zone. Probably pace zone could be thought as 5K time +/- 30 seconds
-* Support the 5K, 10K, half-marathon and marathon training programs
 * Export workouts as TCX to be able to be imported in [Garmin Training Center](http://www.garmin.com/garmin/cms/intosports/training_center) assuming it can do so. It would be helpful if [Garmin Connect](http://connect.garmin.com/)
 was supporting workout import too at some point. For now how to interact with both and the Garmin Agent is a bit in the nebulous side.
 
 # How to run it
 I'm still working on it and it's a bit 'look at the code', but the script is straightforward to use right now.
 
-    ./plan.rb 
+    ./plan.rb --time 22:30
 
-will just display the plan for a 24:00 5K reference time.
+will just display the half-marathon plan for a 22:30 5K reference time.
