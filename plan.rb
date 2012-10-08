@@ -77,10 +77,11 @@ opts.each do |opt, arg|
 end
 
 paces = Paces.new(time)
+training_plan = Program::HALF_MARATHON
 
 # display that for validation
 puts "Training Program for Half-Marathon with a %s 5K time" % sec_to_mmss(time)
-Program::HALF_MARATHON.each{ |program|
+training_plan.weeks.each{ |program|
   puts "Week #{program.week}"
   puts "  KR1"
   program.kr1.steps.each{ | step |

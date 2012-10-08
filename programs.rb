@@ -189,11 +189,19 @@ class WeekProgram
   end
 end
 
+# Training plan
+class TrainingPlan
+  attr_accessor :weeks, :name
+  def initialize(name, weeks)
+    @name = name
+    @weeks = weeks
+  end
+end
 
 # Sample program, the representation of the half marathon program 16-week program
 module Program
   
-  KM5 = [
+  KM5 = TrainingPlan.new("5K", [
     WeekProgram.new(12, 
       Session.new([ Interval.time(15*60),
         Repeat.new(8, [Interval.distance(0.4), Recovery.distance(0.4)]),
@@ -295,12 +303,13 @@ module Program
       Session.new([ Interval.distance(5, PaceZone::EASY) ]),
       Session.new([ Interval.distance(5) ]) ),
 
-    ]
+    ])
     
-  KM10 = []
+  KM10 = TrainingPlan.new("10K", [
+    ])
   
   
-  HALF_MARATHON = [  
+  HALF_MARATHON = TrainingPlan.new("Half-Marathon", [  
   WeekProgram.new(16, 
     Session.new([ Interval.time(15*60),
       Repeat.new(12, [Interval.distance(0.4), Recovery.distance(0.4)]),
@@ -421,7 +430,8 @@ module Program
       Interval.time(10*60) ]),
     Session.new([ Interval.distance(5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(21.1, PaceZone::HMP) ]) )
-  ]
-  NOVICE_MARATHON = []
-  MARATHON = []
+  ])
+  
+  NOVICE_MARATHON = TrainingPlan.new("Novice Marathon", [])
+  MARATHON = TrainingPlan.new("Marathon", [])
 end
