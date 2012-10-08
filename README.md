@@ -1,21 +1,25 @@
 training-plan
 =============
 
-Displays training plan for Half-Marathon using the FIRST training plan.
+Displays training plan for 5K, 10K, Half-Marathon and Marathon using the FIRST training plan.
 
 # What is it ?
 The Furman FIRST training plan from [Furman University](http://www.furmanfirst.com/) is well described in 
 Runner's World book [Run Less Run Faster](http://www.amazon.com/gp/product/159486649X/ref=as_li_ss_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=159486649X&linkCode=as2&tag=stephasthough-20).
 
-Basically, it is a simple 16-week program with moderate running sessions that try to emphasize a 3+2 approach: 3 run sessions and 2 cross-training sessions. Each run session is called 'key run' and there are 3 different key runs:
+Basically, it is a simple 12 or 16-week program with moderate running sessions that try to emphasize a 3+2 approach: 3 run sessions and 2 cross-training sessions. Each run session is called 'key run' and there are 3 different key runs:
 
 * key run 1 - track repeats to improve economy, running speed and vo2 max
 * key run 2 - tempo run paces to improve lactate tolerances
 * key run 3 - long run paces to improve skeletal and cardiac muscle adaptation
 
+The 12-week program is for the 5K and 10K while the 16-week program is for the half-marathon and marathon.
+
 # What problem does it solve ?
 It can be a bit time-consuming to look in the charts and get an entire plan laid out, so
 this small script is intended to be a starting point and get a quick overview of it.
+
+FURMAN provides a calculator online, but this is all but convenient for an entire plan (moreover it is only in miles), so the script will do the entire plan and gives you the paces to run each key-run once you have your 5K reference time.
 
 # What's next ?
 
