@@ -21,7 +21,6 @@ this small script is intended to be a starting point and get a quick overview of
 
 A couple of things can be done, time permitting:
 
-* Fix the training data (it's missing warmup/cooldown in kr1)
 * This needs some serious clean up
 * Fix the workout to support pace zone (low/high) to match Garmin workout instead of single zone. Probably pace zone could be thought as 5K time +/- 30 seconds
 * Support the 5K, 10K, half-marathon and marathon training programs
