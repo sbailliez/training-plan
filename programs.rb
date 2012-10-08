@@ -72,6 +72,11 @@ def get_pace(duration, type, paces)
   when PaceZone::HMP then paces.kr3.hmp
   when PaceZone::HMP13 then paces.kr3.hmp + 13
   when PaceZone::HMP19 then paces.kr3.hmp + 19
+  when PaceZone::MP then paces.kr3.mp
+  when PaceZone::MP9 then paces.kr3.mp + 9
+  when PaceZone::MP12 then paces.kr3.mp + 12
+  when PaceZone::MP19 then paces.kr3.mp + 19
+  when PaceZone::MP28 then paces.kr3.mp + 28
   when PaceZone::ST then paces.kr2.st
   when PaceZone::MT then paces.kr2.mt
   when PaceZone::LT then paces.kr2.lt
@@ -516,6 +521,123 @@ module Program
     Session.new([ Interval.distance(21.1, PaceZone::HMP) ]) )
   ])
   
-  NOVICE_MARATHON = TrainingPlan.new("Novice Marathon", [])
+  NOVICE_MARATHON = TrainingPlan.new("Novice Marathon", [
+  WeekProgram.new(16, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(3, [Interval.distance(1.6), Recovery.distance(0.4)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(3, PaceZone::ST), Interval.distance(3, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(13, PaceZone::MP19) ]) ),
+  
+  WeekProgram.new(15, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(4, [Interval.distance(0.8), Recovery.time(120)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(15, PaceZone::MP28) ]) ),
+  
+  WeekProgram.new(14, 
+    Session.new([ Interval.time(15*60),
+      Interval.distance(1.2), Recovery.distance(0.2),
+      Interval.distance(1.0), Recovery.distance(0.2),
+      Interval.distance(0.8), Recovery.distance(0.2),
+      Interval.distance(0.6), Recovery.distance(0.2),
+      Interval.distance(0.4), Recovery.distance(0.2),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::LT), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(16, PaceZone::MP28) ]) ),
+  
+  WeekProgram.new(13, 
+    Session.new([ Interval.time(15*60), Repeat.new(5, [Interval.distance(1.0), Recovery.distance(0.4)]), Interval.time(10*60) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(6.5, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(17, PaceZone::MP28) ]) ),
+  
+  WeekProgram.new(12, 
+    Session.new([ Interval.time(15*60), Repeat.new(3, [Interval.distance(1.6), Recovery.time(60)]), Interval.time(10*60) ]),
+    Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(20, PaceZone::MP28) ]) ),
+  
+  WeekProgram.new(11, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(2, [Interval.distance(1.2), Recovery.time(120)]),
+      Repeat.new(4, [Interval.distance(0.8), Recovery.time(120)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(22, PaceZone::MP28) ]) ),
+  
+  WeekProgram.new(10, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(6, [Interval.distance(0.8), Recovery.time(90)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(10, PaceZone::LT), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(16, PaceZone::MP9) ]) ),
+  
+  WeekProgram.new(9, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(6, [Interval.distance(0.4), Recovery.time(90)]),
+      Recovery.time(150),
+      Repeat.new(6, [Interval.distance(0.4), Recovery.time(90)]), Interval.time(10*60) ]),
+    Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY)  ]),
+    Session.new([ Interval.distance(24, PaceZone::MP19) ]) ),
+
+  WeekProgram.new(8, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(2, [Interval.distance(1.6), Recovery.time(60)]),
+      Repeat.new(2, [Interval.distance(0.8), Recovery.time(60)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(6.5, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(20, PaceZone::MP19) ]) ),
+
+  WeekProgram.new(7, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(4, [Interval.distance(1.2), Recovery.time(120)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(16, PaceZone::MP) ]),
+    Session.new([ Interval.distance(24, PaceZone::MP12) ]) ),
+
+  WeekProgram.new(6, 
+    Session.new([ Interval.time(15*60),
+      Interval.distance(1.0), Recovery.distance(0.4), Interval.distance(2.0), Recovery.distance(0.4),
+      Interval.distance(1.0), Recovery.distance(0.4), Interval.distance(1.0), Recovery.distance(0.4),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MP), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(30, PaceZone::MP28) ]) ),
+
+  WeekProgram.new(5, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(3, [Interval.distance(1.6), Recovery.distance(0.4)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(16, PaceZone::MP) ]),
+    Session.new([ Interval.distance(21, PaceZone::MP9) ]) ),
+
+  WeekProgram.new(4, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(10, [Interval.distance(0.4), Recovery.distance(0.4)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.time(10*60), Interval.distance(13, PaceZone::MP), Interval.time(10*60) ]),
+    Session.new([ Interval.distance(32, PaceZone::MP19) ]) ),
+
+  WeekProgram.new(3, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(8, [Interval.distance(0.8), Recovery.time(90)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(21, PaceZone::MP) ]) ),
+
+  WeekProgram.new(2, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(5, [Interval.distance(1.0), Recovery.distance(0.4)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(13, PaceZone::MP) ]) ),
+
+  WeekProgram.new(1, 
+    Session.new([ Interval.time(15*60),
+      Repeat.new(6, [Interval.distance(0.4), Recovery.distance(0.4)]),
+      Interval.time(10*60) ]),
+    Session.new([ Interval.time(10*60), Interval.distance(5, PaceZone::MP), Interval.time(10*60) ]),
+    Session.new([ Interval.distance(42.2, PaceZone::MP) ]) )
+  ])
+  
   MARATHON = TrainingPlan.new("Marathon", [])
 end
