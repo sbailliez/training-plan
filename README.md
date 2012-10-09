@@ -1,7 +1,7 @@
 training-plan
 =============
 
-Displays training plan for 5K, 10K, Half-Marathon and Marathon using the FIRST training plan.
+Displays training plan for 5K, 10K, Half-Marathon, Novice Marathon and Marathon using the FIRST training plan.
 
 # What is it ?
 The Furman FIRST training plan from [Furman University](http://www.furmanfirst.com/) is well described in 
@@ -26,7 +26,6 @@ FURMAN provides a calculator online, but this is all but convenient for an entir
 A couple of things can be done, time permitting:
 
 * This needs some serious clean up
-* Support the novice marathon and marathon training plans
 * Fix the workout to support pace zone (low/high) to match Garmin workout instead of single zone. Probably pace zone could be thought as 5K time +/- 30 seconds
 * Export workouts as TCX to be able to be imported in [Garmin Training Center](http://www.garmin.com/garmin/cms/intosports/training_center) assuming it can do so. It would be helpful if [Garmin Connect](http://connect.garmin.com/)
 was supporting workout import too at some point. For now how to interact with both and the Garmin Agent is a bit in the nebulous side.
