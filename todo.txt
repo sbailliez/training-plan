@@ -1,0 +1,10 @@
+Large Tasks:
+1. Make the code in programs less hard coded and more dynamic + break it to more classes.
+2. Build a nice UI instead of only the command line.
+3. Make it generic to upload different types of plans (make it easy to do it via algo)
+
+Features:
+1. upload to google calander.
+2. upload to a germain training plan.
+3. Help should have explanation what each work out means.
+4. Add rest/cross to schedule
