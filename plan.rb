@@ -20,7 +20,7 @@ require 'date'
 time = 24*60
 training_plan = Program::HALF_MARATHON
 start_date = Date.today()
-race_date_override = nil
+end_date = nil
 
 
 opts = GetoptLong.new(
@@ -44,17 +44,17 @@ opts.each do |opt, arg|
         --program [name]:
            The program name: 5k, 10k, half-marathon (default), novice-marathon, marathon
 
-        --race-day -r:
+        --race-date -r:
             When does the race starts [mm/dd/yyyy]
 
-        --start day -s:
+        --start-date -s:
            Training start date, now (default) [mm/dd/yyyy]."
 
       exit 0
     when '--time'
       time = arg.scan(/(\d{2}):(\d{2})/).collect{ $1.to_i*60 + $2.to_i }.first
     when '--race-date'
-      race_date_override = Date.parse(arg)
+      end_date = Date.parse(arg)
     when '--start-date'
       start_date = Date.parse(arg)
     when '--program'
@@ -69,6 +69,15 @@ opts.each do |opt, arg|
   end
 end
 
+
+duration_in_weeks = training_plan.weeks.length
+
+if (!end_date.nil?)
+  start_date = end_date - (duration_in_weeks - 1) * 7
+else
+  end_date = start_date + (duration_in_weeks - 1) * 7
+end
+
 paces = Paces.new(time)
 puts "Training Program for %s with a %s 5K time" % [training_plan.name, Utils.sec_to_mmss(time)]
 puts "Start-Date: #{start_date}"
@@ -77,34 +86,15 @@ puts "Start-Date: #{start_date}"
 #1.support the case where the race date is beyond the end of the program
 #2. improve the week/days calculations (there is a bug right now with the race_date week) and move to utils
 
-number_weeks = nil
-program_end_date = nil
-normalize_week_count = 0
-unless race_date_override.nil?
-  number_weeks = race_date_override.cweek - start_date.cweek + 1
-  program_end_date = Date.commercial(race_date_override.cwyear, race_date_override.cweek, 1)
-  puts "Race Day: #{race_date_override}"
-  puts "program original length: #{training_plan.weeks.length} weeks"
-  if (number_weeks < training_plan.weeks.length)
-    normalize_week_count = training_plan.weeks.length - number_weeks
-    puts "but you will only have #{number_weeks} weeks"
-  end
-else
-  number_weeks = training_plan.weeks.length
-  program_end_date = start_date + (number_weeks - 1) * 7
-  puts "program will end on: #{program_end_date}"
-  puts "program length: #{number_weeks} weeks"
-end
+puts "Program will end on: #{end_date}"
+puts "Program length: #{duration_in_weeks} weeks out of #{training_plan.weeks.length} weeks"
 
-training_plan.weeks.each{ |program|
-  #Exit once all the weeks that the user has time to train have been printed
-  exit 0 if (program.week - normalize_week_count <= 0)
-puts "------------------------------------------------------------"
-
-  week_start_day = Date.commercial(program_end_date.cwyear,
-    program_end_date.cweek - (number_weeks - program.week + normalize_week_count), 1)
-
-  puts "# #{program.week - normalize_week_count} - #{week_start_day}  "
+plan = training_plan.weeks.slice(-training_plan.weeks.length, duration_in_weeks)
+plan.each{ |program|
+  week_start_day = Date.commercial(start_date.cwyear, start_date.cweek + (plan.length - program.week), 1)
+  
+  puts
+  puts "Week #{program.week} of #{training_plan.weeks.length}"
   puts "  KR1 #{week_start_day}"
   program.kr1.steps.each{ | step |
     puts "    %s" % Utils.display_session(step, paces)
