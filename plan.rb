@@ -104,7 +104,7 @@ puts "------------------------------------------------------------"
   week_start_day = Date.commercial(program_end_date.cwyear,
     program_end_date.cweek - (number_weeks - program.week + normalize_week_count), 1)
 
-  puts "# #{program.week - normalize_week_count} - #{week_start_day}  "
+  puts "# #{number_weeks - program.week + normalize_week_count} - #{week_start_day}  "
   puts "  KR1 #{week_start_day}"
   program.kr1.steps.each{ | step |
     puts "    %s" % Utils.display_session(step, paces)
