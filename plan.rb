@@ -44,10 +44,10 @@ opts.each do |opt, arg|
         --program [name]:
            The program name: 5k, 10k, half-marathon (default), novice-marathon, marathon
 
-        --race-day -r:
+        --race-date -r:
             When does the race starts [mm/dd/yyyy]
 
-        --start day -s:
+        --start-date -s:
            Training start date, now (default) [mm/dd/yyyy]."
 
       exit 0
@@ -104,7 +104,7 @@ puts "------------------------------------------------------------"
   week_start_day = Date.commercial(program_end_date.cwyear,
     program_end_date.cweek - (number_weeks - program.week + normalize_week_count), 1)
 
-  puts "# #{number_weeks - program.week + normalize_week_count} - #{week_start_day}  "
+  puts "Week # #{number_weeks - program.week + normalize_week_count + 1} of # #{number_weeks} - #{week_start_day}  "
   puts "  KR1 #{week_start_day}"
   program.kr1.steps.each{ | step |
     puts "    %s" % Utils.display_session(step, paces)
