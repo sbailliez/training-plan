@@ -306,7 +306,7 @@ module Program
       Session.new([ Interval.time(15*60),
         Repeat.new(8, [Interval.distance(0.4), Recovery.distance(0.4)]),
         Interval.time(10*60) ]),
-      Session.new([ Interval.distance(3, PaceZone::ST) ]),
+      Session.new([ Interval.distance(5, PaceZone::ST) ]),
       Session.new([ Interval.distance(10, PaceZone::LT) ]) ),
 
     WeekProgram.new(11, 
@@ -403,7 +403,7 @@ module Program
   HALF_MARATHON = TrainingPlan.new("Half-Marathon", [  
   WeekProgram.new(16, 
     Session.new([ Interval.time(15*60),
-      Repeat.new(12, [Interval.distance(0.4), Recovery.distance(0.4)]),
+      Repeat.new(12, [Interval.distance(0.4), Recovery.time(90)]),
       Interval.time(10*60) ]),
     Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(12.5, PaceZone::HMP13) ]) ),
@@ -418,8 +418,8 @@ module Program
       Interval.distance(0.6), Recovery.distance(0.4),
       Interval.distance(0.4), Recovery.distance(0.4),
       Interval.time(10*60) ]),
-    Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
-    Session.new([ Interval.distance(12.5, PaceZone::HMP13) ]) ),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(8, PaceZone::MT), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(14, PaceZone::HMP13) ]) ),
   
   WeekProgram.new(14, 
     Session.new([ Interval.time(15*60), Repeat.new(6, [Interval.distance(0.8), Recovery.time(90)]), Interval.time(10*60) ]),
@@ -428,7 +428,7 @@ module Program
   
   WeekProgram.new(13, 
     Session.new([ Interval.time(15*60), Repeat.new(5, [Interval.distance(1.0), Recovery.distance(0.4)]), Interval.time(10*60) ]),
-    Session.new([ Interval.distance(3, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
+    Session.new([ Interval.distance(1.5, PaceZone::EASY), Interval.distance(5, PaceZone::ST), Interval.distance(1.5, PaceZone::EASY) ]),
     Session.new([ Interval.distance(14, PaceZone::HMP13) ]) ),
   
   WeekProgram.new(12, 
