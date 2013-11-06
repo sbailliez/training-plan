@@ -75,6 +75,8 @@ duration_in_weeks = training_plan.weeks.length
 if (!end_date.nil?)
   start_date = end_date - (duration_in_weeks - 1) * 7
 else
+  # we want to start on the next tuesday
+  start_date = Date.commercial(start_date.cwyear, start_date.cweek + 1, 2)
   end_date = start_date + (duration_in_weeks - 1) * 7
 end
 
@@ -91,7 +93,8 @@ puts "Program length: #{duration_in_weeks} weeks out of #{training_plan.weeks.le
 
 plan = training_plan.weeks.slice(-training_plan.weeks.length, duration_in_weeks)
 plan.each{ |program|
-  week_start_day = Date.commercial(start_date.cwyear, start_date.cweek + (plan.length - program.week), 1)
+  
+  week_start_day = start_date + (plan.length - program.week)*7
   
   puts
   puts "Week #{program.week} of #{training_plan.weeks.length}"
